@@ -1,0 +1,60 @@
+# Write Automation Tests Workflow
+# Agent: Automator (Automation Agent)
+# Purpose: Create Playwright E2E tests using Page Object Model pattern
+
+workflow:
+  metadata:
+    id: "write-automation-tests"
+    name: "Write Automation Tests"
+    trigger: "write automation, create playwright tests, automate tests, e2e tests"
+    agent: "automation-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+    scale_aware: true
+
+  inputs:
+    - name: "mode"
+      description: "Automation mode — 'A' for Direct Automation (source code analysis, optional site-explorer) or 'B' for Codegen Capture (record interactions in live browser). If not provided, Automator asks the user."
+      required: false
+    - name: "source_code"
+      description: "Path to the application source code directory. Used in Mode A for analyzing UI components, selectors, and user flows."
+      required: false
+    - name: "app_url"
+      description: "Application URL. Optional for Mode A (enables site-explorer discovery). Required for Mode B (codegen needs a live app)."
+      required: false
+    - name: "credentials"
+      description: "Login credentials — email and password. If app has auth, these are stored in .env (never hardcoded)."
+      required: false
+    - name: "user_stories"
+      description: "Path to user stories file, pasted in chat, OR Jira ticket number. Used in Mode B to guide codegen recording. If not provided, Automator checks outputs/user-stories-agent/ first, then asks the user."
+      required: false
+    - name: "test_cases"
+      description: "Path to test cases file, pasted in chat, OR Jira ticket number. Used in Mode A. If not provided, Automator checks outputs/test-case-agent/ first, then asks the user."
+      required: false
+    - name: "scale"
+      description: "Depth level — quick (3-5 tests), standard (8-12 tests), or enterprise (full coverage). If not provided, Automator asks the user."
+      required: false
+
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "automation/pages/"
+      files:
+        - "BasePage.js"
+        - "{PageName}.js"
+    - path: "automation/tests/e2e/"
+      files:
+        - "{feature-name}.spec.js"
+    - path: "outputs/automation-agent/"
+      files:
+        - "automation-coverage-report.md"
+        - "test-execution-summary.md"
+
+  handoff:
+    suggest:
+      - workflow: "report-bugs"
+        agent: "bug-report-agent"
+        message: "Test execution complete. Recommend activating Catcher (Bug Reporter) to create structured bug reports for any failing tests or discovered issues."

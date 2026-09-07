@@ -1,0 +1,38 @@
+# Generate SRS Workflow
+# Agent: Specifier (SRS Agent)
+# Purpose: Analyze project documents and generate IEEE 830 Software Requirements Specification
+
+workflow:
+  metadata:
+    id: "generate-srs"
+    name: "Generate SRS"
+    trigger: "generate srs, create srs, requirements specification"
+    agent: "srs-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+    scale_aware: true
+
+  inputs:
+    - name: "project_name"
+      description: "Name of the project for which to generate the SRS"
+      required: true
+    - name: "documents"
+      description: "Specific documents to analyze (defaults to scanning project-docs/ if not provided)"
+      required: false
+
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "outputs/srs-agent/"
+      files:
+        - "SRS-{project}-{date}.docx"
+        - "SRS-{project}-{date}.md"
+
+  handoff:
+    suggest:
+      - workflow: "generate-test-cases"
+        agent: "test-case-agent"
+        message: "SRS document is complete. Recommend activating Scriptor (Test Case Generator) to generate test cases from the functional and non-functional requirements."

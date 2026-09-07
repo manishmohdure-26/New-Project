@@ -1,0 +1,388 @@
+# SDET Skill Manifest
+# Maps slash commands to agents and workflows
+
+skills:
+  # Discovery
+  - command: "/mom-agent"
+    agent: "mom-agent"
+    description: "Recorder generates Minutes of Meeting from project documents"
+    type: "agent"
+
+  - command: "/user-stories-agent"
+    agent: "user-stories-agent"
+    description: "Narrator extracts user stories and epics from project documents"
+    type: "agent"
+
+  - command: "/srs-agent"
+    agent: "srs-agent"
+    description: "Specifier generates IEEE 830 SRS documents"
+    type: "agent"
+
+  - command: "/knowledge-search-agent"
+    agent: "knowledge-search-agent"
+    description: "Finder searches MOMs, transcripts, and project docs to answer questions"
+    type: "agent"
+
+  - command: "/acceptance-criteria-agent"
+    agent: "acceptance-criteria-agent"
+    description: "Definer writes acceptance criteria for user stories and creates them in Jira"
+    type: "agent"
+
+  # Analysis
+  - command: "/repo-analysis-agent"
+    agent: "repo-analysis-agent"
+    description: "Scanner analyzes source code architecture, components, and testability"
+    type: "agent"
+
+  # Requirements Engineering (v4.0)
+  - command: "/requirements-agent"
+    agent: "requirements-agent"
+    description: "Elicitor elicits and refines stakeholder inputs into clear, testable, unambiguous requirements"
+    type: "agent"
+
+  - command: "/traceability-agent"
+    agent: "traceability-agent"
+    description: "Weaver builds and maintains the Requirements Traceability Matrix and detects coverage gaps"
+    type: "agent"
+
+  - command: "/dependency-analysis-agent"
+    agent: "dependency-analysis-agent"
+    description: "Mapper analyzes package/service dependencies for testing risk and change blast-radius"
+    type: "agent"
+
+  - command: "/api-analysis-agent"
+    agent: "api-analysis-agent"
+    description: "Inspector inventories the API surface and analyzes it for testability gaps"
+    type: "agent"
+
+  - command: "/database-analysis-agent"
+    agent: "database-analysis-agent"
+    description: "Schemist analyzes database schema/ERD for data-layer testability and integrity risks"
+    type: "agent"
+
+  - command: "/architecture-agent"
+    agent: "architecture-agent"
+    description: "Blueprint documents and reviews system architecture from a QA lens with a layer-to-test mapping"
+    type: "agent"
+
+  - command: "/risk-analysis-agent"
+    agent: "risk-analysis-agent"
+    description: "Assessor builds a scored quality risk register to drive risk-based test prioritization"
+    type: "agent"
+
+  # Design
+  - command: "/test-plan-agent"
+    agent: "test-plan-agent"
+    description: "Charter authors IEEE 829-style test plans with scope, entry/exit criteria, schedule, and risk"
+    type: "agent"
+
+  - command: "/test-scenario-agent"
+    agent: "test-scenario-agent"
+    description: "Strategist creates high-level test scenarios with risk-based prioritization"
+    type: "agent"
+
+  - command: "/test-case-agent"
+    agent: "test-case-agent"
+    description: "Scriptor generates comprehensive manual test cases"
+    type: "agent"
+
+  - command: "/test-strategy-agent"
+    agent: "test-strategy-agent"
+    description: "Tactician defines the org/project-level test strategy — levels, automation pyramid, criteria, and metrics"
+    type: "agent"
+
+  - command: "/test-estimation-agent"
+    agent: "test-estimation-agent"
+    description: "Estimator estimates testing effort/schedule with WBS, PERT, Test Point Analysis, and buffers"
+    type: "agent"
+
+  - command: "/environment-agent"
+    agent: "environment-agent"
+    description: "Provisioner plans and verifies test environments with a go/no-go readiness checklist"
+    type: "agent"
+
+  - command: "/test-data-agent"
+    agent: "test-data-agent"
+    description: "Fabricator designs and generates test data with PII/PHI masking and integrity preservation"
+    type: "agent"
+
+  - command: "/test-design-agent"
+    agent: "test-design-agent"
+    description: "Designer applies formal test design techniques (EP, BVA, decision table, state transition, pairwise) and optimizes coverage"
+    type: "agent"
+
+  - command: "/exploratory-test-agent"
+    agent: "exploratory-test-agent"
+    description: "Explorer runs session-based exploratory testing — charters, tours, and structured session notes"
+    type: "agent"
+
+  - command: "/negative-test-agent"
+    agent: "negative-test-agent"
+    description: "Contrarian designs negative and error-path tests verifying graceful rejection"
+    type: "agent"
+
+  - command: "/boundary-test-agent"
+    agent: "boundary-test-agent"
+    description: "Brink applies boundary value analysis (2-value/3-value BVA, robustness) to every bounded input"
+    type: "agent"
+
+  - command: "/equivalence-agent"
+    agent: "equivalence-agent"
+    description: "Partitioner applies equivalence class partitioning for a minimal high-coverage case set"
+    type: "agent"
+
+  - command: "/decision-table-agent"
+    agent: "decision-table-agent"
+    description: "Tabulator applies decision table testing — condition/action tables and one test per rule"
+    type: "agent"
+
+  - command: "/state-transition-agent"
+    agent: "state-transition-agent"
+    description: "Switcher applies state transition testing — transition tables, invalid transitions, and switch coverage"
+    type: "agent"
+
+  # Execution
+  - command: "/automation-agent"
+    agent: "automation-agent"
+    description: "Automator writes Playwright E2E tests (Direct Automation or Codegen Capture)"
+    type: "agent"
+
+  - command: "/api-test-agent"
+    agent: "api-test-agent"
+    description: "Requester writes Playwright API tests from Swagger, Postman, source code, or manual specs"
+    type: "agent"
+
+  - command: "/workflow-agent"
+    agent: "workflow-agent"
+    description: "Pathfinder designs role-based E2E workflows (Phase 1 docs XLSX) and automates them as serial Playwright specs (Phase 2)"
+    type: "agent"
+
+  - command: "/performance-test-agent"
+    agent: "performance-test-agent"
+    description: "Benchmark records a workflow, generates a JMeter test plan, runs load/stress tests, and produces a verdict report"
+    type: "agent"
+
+  - command: "/contract-test-agent"
+    agent: "contract-test-agent"
+    description: "Pactkeeper designs consumer-driven contract tests (Pact-style) with broker workflow and can-i-deploy checks"
+    type: "agent"
+
+  - command: "/swagger-agent"
+    agent: "swagger-agent"
+    description: "Curator drives testing from an OpenAPI/Swagger spec — lints it and derives a path×method×response test matrix"
+    type: "agent"
+
+  - command: "/postman-agent"
+    agent: "postman-agent"
+    description: "Courier authors and manages Postman collections with pm.* scripts, environments, and Newman CLI runs"
+    type: "agent"
+
+  - command: "/playwright-agent"
+    agent: "playwright-agent"
+    description: "Stagehand engineers the Playwright framework — config, fixtures, de-flaking, and POM architecture (never edits protected configs)"
+    type: "agent"
+
+  - command: "/visual-testing-agent"
+    agent: "visual-testing-agent"
+    description: "Pixel designs visual regression testing — baselines, comparison tolerance, and cross-viewport strategy"
+    type: "agent"
+
+  - command: "/jmeter-agent"
+    agent: "jmeter-agent"
+    description: "Meter authors and tunes JMeter .jmx test plans with correlation and non-GUI CLI reporting"
+    type: "agent"
+
+  - command: "/k6-agent"
+    agent: "k6-agent"
+    description: "Surge writes k6 scripts with scenarios, thresholds, checks, and custom metrics"
+    type: "agent"
+
+  - command: "/load-test-agent"
+    agent: "load-test-agent"
+    description: "Hauler designs load tests — workload modeling, ramp profiles, SLA/SLO, and results interpretation"
+    type: "agent"
+
+  - command: "/stress-test-agent"
+    agent: "stress-test-agent"
+    description: "Crusher designs stress tests — step-load ramps to the breakpoint and recovery verification"
+    type: "agent"
+
+  - command: "/spike-test-agent"
+    agent: "spike-test-agent"
+    description: "Spiker designs spike tests — sudden load surges to test elasticity and recovery"
+    type: "agent"
+
+  - command: "/soak-test-agent"
+    agent: "soak-test-agent"
+    description: "Endurer designs soak/endurance tests to surface memory leaks and gradual degradation"
+    type: "agent"
+
+  - command: "/sql-agent"
+    agent: "sql-agent"
+    description: "Querier authors SQL for data-layer test verification and reconciliation (SELECT-first)"
+    type: "agent"
+
+  - command: "/database-validation-agent"
+    agent: "database-validation-agent"
+    description: "Verifier designs data validation/integrity test suites and ETL/data-load reconciliation"
+    type: "agent"
+
+  - command: "/migration-agent"
+    agent: "migration-agent"
+    description: "Migrator plans and tests DB/data migrations with reconciliation, rollback, and zero-downtime strategy"
+    type: "agent"
+
+  # Reporting
+  - command: "/bug-report-agent"
+    agent: "bug-report-agent"
+    description: "Catcher creates structured bug reports with root cause analysis"
+    type: "agent"
+
+  - command: "/simple-bug-report-agent"
+    agent: "simple-bug-report-agent"
+    description: "Spotter writes quick, no-ceremony bug reports — no evidence, no user story linking"
+    type: "agent"
+
+  - command: "/jira-bug-tracker-agent"
+    agent: "jira-bug-tracker-agent"
+    description: "Tracker fetches bug data from Jira and generates dashboard reports"
+    type: "agent"
+
+  - command: "/root-cause-agent"
+    agent: "root-cause-agent"
+    description: "Digger performs root cause analysis — 5 Whys, Fishbone, timeline reconstruction, and CAPA"
+    type: "agent"
+
+  - command: "/test-summary-agent"
+    agent: "test-summary-agent"
+    description: "Digest produces the IEEE 829 Test Summary Report with defect matrix and go/no-go recommendation"
+    type: "agent"
+
+  - command: "/execution-report-agent"
+    agent: "execution-report-agent"
+    description: "Reporter generates run-level execution/cycle reports from run data with failure grouping and trends"
+    type: "agent"
+
+  - command: "/qa-dashboard-agent"
+    agent: "qa-dashboard-agent"
+    description: "Gauge designs ongoing QA metrics dashboards with KPI catalog, RAG status, and trends"
+    type: "agent"
+
+  - command: "/documentation-agent"
+    agent: "documentation-agent"
+    description: "Scribe authors and maintains QA process & framework documentation and detects drift"
+    type: "agent"
+
+  # Verification
+  - command: "/retest-agent"
+    agent: "retest-agent"
+    description: "Gatekeeper validates bug fixes via Jira, deployment checks, and retesting"
+    type: "agent"
+
+  - command: "/compliance-agent"
+    agent: "compliance-agent"
+    description: "Sentinel audits applications for HIPAA / BAA / SOC 2 / CCPA / California / FHIR / OWASP API / IaC compliance"
+    type: "agent"
+
+  - command: "/spec-conformance-agent"
+    agent: "spec-conformance-agent"
+    description: "Inspector audits a screen/module against curated-wiki requirements via a live walk; produces a client-style HTML conformance dashboard (PASS/FAIL/PARTIAL/NOT-REACHABLE with severity, defect class, verbatim spec quotes, and screenshots)"
+    type: "agent"
+
+  # Quality & Compliance (v4.0)
+  - command: "/security-test-agent"
+    agent: "security-test-agent"
+    description: "Shield plans authorized security tests mapped to OWASP Top 10 / ASVS with STRIDE threat modeling"
+    type: "agent"
+
+  - command: "/penetration-agent"
+    agent: "penetration-agent"
+    description: "Breaker plans and reports AUTHORIZED penetration tests (requires written rules of engagement)"
+    type: "agent"
+
+  - command: "/authentication-agent"
+    agent: "authentication-agent"
+    description: "Keymaster designs authN/authZ tests — sessions, tokens, RBAC/ABAC, privilege escalation, IDOR"
+    type: "agent"
+
+  - command: "/accessibility-agent"
+    agent: "accessibility-agent"
+    description: "Advocate runs accessibility testing — axe/Lighthouse scans, keyboard nav, screen readers, contrast, ARIA"
+    type: "agent"
+
+  - command: "/wcag-agent"
+    agent: "wcag-agent"
+    description: "Auditor audits WCAG 2.2 conformance and produces a VPAT-style Accessibility Conformance Report"
+    type: "agent"
+
+  - command: "/hipaa-agent"
+    agent: "hipaa-agent"
+    description: "Guardian performs a deep HIPAA audit — Privacy/Security/Breach rules, PHI safeguards, de-identification"
+    type: "agent"
+
+  - command: "/soc2-agent"
+    agent: "soc2-agent"
+    description: "Attestor performs a deep SOC 2 readiness audit — Trust Services Criteria, CC1–CC9, evidence matrix"
+    type: "agent"
+
+  - command: "/ccpa-agent"
+    agent: "ccpa-agent"
+    description: "Steward performs a deep CCPA/CPRA audit — consumer rights, request workflow, disclosures"
+    type: "agent"
+
+  - command: "/fhir-agent"
+    agent: "fhir-agent"
+    description: "Interop tests HL7 FHIR (R4) conformance — profile validation, RESTful API, terminology, US Core, SMART-on-FHIR"
+    type: "agent"
+
+  - command: "/code-review-agent"
+    agent: "code-review-agent"
+    description: "Critic reviews test and app code from a QA/testability lens with severity-rated findings"
+    type: "agent"
+
+  # Documentation
+  - command: "/release-note-agent"
+    agent: "release-note-agent"
+    description: "Releaser generates milestone-based release notes as Markdown + Word (.docx)"
+    type: "agent"
+
+  # DevOps & CI/CD (v4.0)
+  - command: "/pipeline-agent"
+    agent: "pipeline-agent"
+    description: "Conductor designs tool-agnostic CI/CD test pipelines — stages, sharding, quality gates, flaky quarantine"
+    type: "agent"
+
+  - command: "/github-agent"
+    agent: "github-agent"
+    description: "Octo implements testing CI on GitHub Actions — workflow YAML, matrix, caching, artifacts, OIDC"
+    type: "agent"
+
+  - command: "/jenkins-agent"
+    agent: "jenkins-agent"
+    description: "Butler implements testing CI on Jenkins — Jenkinsfiles, parallel stages, credentials, report publishing"
+    type: "agent"
+
+  - command: "/docker-agent"
+    agent: "docker-agent"
+    description: "Stevedore containerizes test environments — Dockerfiles, compose stacks, ephemeral DBs, Playwright-in-container"
+    type: "agent"
+
+  - command: "/kubernetes-agent"
+    agent: "kubernetes-agent"
+    description: "Helmsman runs and tests workloads on Kubernetes — Job runners, ephemeral namespaces, Helm test hooks, probes"
+    type: "agent"
+
+  - command: "/prompt-agent"
+    agent: "prompt-agent"
+    description: "Promptsmith engineers and refines prompts for QA/AI workflows with patterns, guardrails, and an evaluation rubric"
+    type: "agent"
+
+  - command: "/refactor-agent"
+    agent: "refactor-agent"
+    description: "Sculptor performs behavior-preserving test-code refactoring — POM extraction, DRY, flaky fixes (never touches protected configs)"
+    type: "agent"
+
+  - command: "/learning-agent"
+    agent: "learning-agent"
+    description: "Mentor builds QA upskilling paths, katas, quizzes, and skills-gap assessments"
+    type: "agent"

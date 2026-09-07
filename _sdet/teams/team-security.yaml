@@ -1,0 +1,19 @@
+# Security Review Team
+# Use for: security assessments, vulnerability discussions, auth flow reviews
+
+team:
+  name: "Security Review Team"
+  icon: "🔐"
+  description: "Collaborate on security testing, vulnerability assessment, and hardening"
+  agents:
+    - security-test-agent   # Guardian — security testing and OWASP perspective
+    - adversarial-reviewer  # Challenger — finds gaps in security coverage
+    - qa-architect          # Planner — risk assessment and strategy perspective
+    - api-test-agent        # Requester — API security and endpoint perspective
+  facilitator: sdet-master  # Nexus moderates
+
+  discussion_prompts:
+    - "What are the top security risks we're not testing for?"
+    - "Is the authentication flow properly validated at every endpoint?"
+    - "Are we covering all OWASP Top 10 categories for this application?"
+    - "What input validation gaps could lead to injection attacks?"

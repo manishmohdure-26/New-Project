@@ -1,0 +1,20 @@
+# Discovery Team
+# Use for: requirements analysis, document review, story extraction
+
+team:
+  name: "Discovery Team"
+  icon: "🔍"
+  description: "Analyze project documents, extract requirements, and identify gaps"
+  agents:
+    - mom-agent             # Recorder — meeting documentation and decisions
+    - user-stories-agent    # Narrator — user story extraction and prioritization
+    - srs-agent                     # Specifier — formal requirements engineering
+    - knowledge-search-agent        # Finder — knowledge search across all project docs
+    - acceptance-criteria-agent     # Definer — acceptance criteria for user stories
+
+  discussion_prompts:
+    - "Are all meeting decisions captured and actionable?"
+    - "Do the user stories cover all discussed features?"
+    - "Are there conflicting requirements across documents?"
+    - "What requirements are implied but not explicitly stated?"
+    - "Are the acceptance criteria testable and traceable to discussions?"

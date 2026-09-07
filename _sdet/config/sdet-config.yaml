@@ -1,0 +1,29 @@
+# SDET System Configuration
+# Global settings for the SDET multi-agent QA system
+
+system:
+  name: "SDET Agent System v4"
+  version: "4.0.0"
+  module: "sdet"
+  description: "BMAD-inspired multi-agent QA testing system"
+
+defaults:
+  output_folder: "outputs"
+  project_context: "project-context.md"
+agents:
+  manifest: "_sdet/agents/agent-manifest.yaml"
+
+workflows:
+  root: "_sdet/workflows"
+
+templates:
+  root: "_sdet/data/templates"
+
+checklists:
+  root: "_sdet/data/checklists"
+
+party_mode:
+  enabled: true
+  default_team: "party-mode-default"
+
+

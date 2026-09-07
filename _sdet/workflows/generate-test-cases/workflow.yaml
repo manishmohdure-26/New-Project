@@ -1,0 +1,40 @@
+# Generate Test Cases Workflow
+# Agent: Scriptor (Test Case Generator)
+# Purpose: Analyze code and requirements to generate comprehensive test cases
+
+workflow:
+  metadata:
+    id: "generate-test-cases"
+    name: "Generate Test Cases"
+    trigger: "generate test cases, create test cases, write tests"
+    agent: "test-case-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+    scale_aware: true
+
+  inputs:
+    - name: "feature_name"
+      description: "Name of the feature or module to generate test cases for"
+      required: true
+    - name: "user_stories"
+      description: "Path to user stories file, user stories pasted in chat, OR a Jira ticket/epic number (fetched via Jira MCP). If not provided, Scriptor checks outputs/user-stories-agent/ first, then asks the user."
+      required: false
+    - name: "srs_document"
+      description: "Path to SRS document for detailed requirements (outputs/srs-agent/)"
+      required: false
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "outputs/test-case-agent/"
+      files:
+        - "TestCases-{feature}-{date}.xlsx"
+        - "TestCases-{feature}-{date}.md"
+
+  handoff:
+    suggest:
+      - workflow: "write-automation-tests"
+        agent: "automation-agent"
+        message: "Test cases are ready. Recommend activating Automator (Automation Agent) to automate the test cases marked as automation-suitable."

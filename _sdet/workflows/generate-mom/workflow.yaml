@@ -1,0 +1,42 @@
+# Generate MOM Workflow
+# Agent: Recorder (MOM Agent)
+# Purpose: Analyze meeting transcripts, recordings, and notes to generate structured Minutes of Meeting
+
+workflow:
+  metadata:
+    id: "generate-mom"
+    name: "Generate MOM"
+    trigger: "generate mom, meeting minutes, capture meeting notes"
+    agent: "mom-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+    scale_aware: true
+
+  inputs:
+    - name: "meeting_source"
+      description: "Transcript, recording, or notes file (from project-docs/transcripts/, project-docs/recordings/, or pasted text)"
+      required: true
+    - name: "meeting_date"
+      description: "Date of the meeting (defaults to today if not provided)"
+      required: false
+
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "outputs/mom-agent/date-mom/"
+      files:
+        - "MOM-YYYY-MM-DD-session-topic.md"
+        - "MOM-YYYY-MM-DD-session-topic.docx"
+    - path: "outputs/mom-agent/feature-mom/"
+      files:
+        - "MOM-FEATURE-feature-name.md"
+        - "MOM-FEATURE-feature-name.docx"
+
+  handoff:
+    suggest:
+      - workflow: "generate-user-stories"
+        agent: "user-stories-agent"
+        message: "MOM document is complete. Recommend activating Narrator (User Stories Agent) to extract user stories from the captured discussion topics, decisions, and action items."

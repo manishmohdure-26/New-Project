@@ -1,0 +1,39 @@
+# Default Party Mode — All Agents
+# Use for: open discussion, brainstorming, post-mortems, retrospectives
+
+team:
+  name: "Full Team Party"
+  icon: "🎉"
+  description: "All agents collaborate on any topic — open-ended discussion"
+  agents:
+    - mom-agent             # Recorder — documentation and decisions perspective
+    - user-stories-agent    # Narrator — user journey and requirements perspective
+    - srs-agent                     # Specifier — formal requirements and compliance perspective
+    - knowledge-search-agent        # Finder — project knowledge search perspective
+    - acceptance-criteria-agent     # Definer — acceptance criteria and testability perspective
+    - repo-analysis-agent           # Scanner — architecture and code analysis perspective
+    - test-scenario-agent   # Strategist — scenario design perspective
+    - test-case-agent   # Scriptor — scenario and coverage perspective
+    - automation-agent      # Automator — automation and tooling perspective
+    - api-test-agent        # Requester — API testing perspective
+    - workflow-agent                # Pathfinder — role-based E2E workflow perspective
+    - performance-test-agent        # Benchmark — performance and load testing perspective
+    - bug-report-agent          # Catcher — bug impact and severity perspective
+    - retest-agent          # Gatekeeper — verification and release perspective
+    - compliance-agent              # Sentinel — healthcare compliance and security perspective
+    - jira-bug-tracker-agent              # Tracker — bug metrics and quality trends perspective
+    - release-note-agent            # Releaser — release documentation perspective
+    # simple-bug-report-agent (Spotter) intentionally excluded — lightweight Catcher variant, no distinct perspective
+
+  discussion_prompts:
+    - "Let's discuss the overall quality of this release."
+    - "What are the biggest risks we're not testing for?"
+    - "Post-mortem: what went wrong and how do we prevent it?"
+    - "Sprint retrospective: what should we improve in our QA process?"
+
+  party_rules:
+    - "The topic is introduced and relevant agents respond"
+    - "Agents respond in character — agree, disagree, and build on each other's ideas"
+    - "User can redirect discussion, ask follow-ups, or challenge responses"
+    - "Key takeaways and action items are summarized at the end"
+    - "Not all agents need to speak on every topic — the most relevant agents respond"

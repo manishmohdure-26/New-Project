@@ -1,0 +1,41 @@
+# Report Bugs Workflow
+# Agent: Catcher (Bug Reporter)
+# Purpose: Analyze test failures and create structured bug reports
+
+workflow:
+  metadata:
+    id: "report-bugs"
+    name: "Report Bugs"
+    trigger: "report bug, bug report, found a bug, test failure"
+    agent: "bug-report-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+    scale_aware: true
+
+  inputs:
+    - name: "error_output"
+      description: "Error message, stack trace, or test failure output to analyze"
+      required: true
+    - name: "source_code"
+      description: "Relevant source code file or path where the bug occurs"
+      required: false
+    - name: "steps"
+      description: "Steps to reproduce the bug (if already known)"
+      required: false
+
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "outputs/bug-report-agent/"
+      files:
+        - "BugReport-{module}-{date}.docx"
+        - "BugReport-{module}-{date}.md"
+
+  handoff:
+    suggest:
+      - workflow: "write-automation-tests"
+        agent: "automation-agent"
+        message: "Test-related bug identified. Recommend activating Automator (Automation Agent) to fix or create regression tests."

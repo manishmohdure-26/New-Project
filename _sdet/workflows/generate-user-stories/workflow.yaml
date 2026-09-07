@@ -1,0 +1,41 @@
+# Generate User Stories Workflow
+# Agent: Narrator (User Stories Agent)
+# Purpose: Extract and organize user stories from project documents into epics with acceptance criteria
+
+workflow:
+  metadata:
+    id: "generate-user-stories"
+    name: "Generate User Stories"
+    trigger: "generate user stories, create user stories, extract stories, epics"
+    agent: "user-stories-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+    scale_aware: true
+
+  inputs:
+    - name: "scope"
+      description: "Scope of story generation: 'full' (all features), 'feature-specific' (single feature), or 'incremental' (new/changed features only)"
+      required: false
+    - name: "feature_focus"
+      description: "Specific feature or module to focus on (used when scope is 'feature-specific')"
+      required: false
+
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "outputs/user-stories-agent/"
+      files:
+        - "user-stories-{feature-or-date}.md"
+        - "user-stories-{feature-or-date}.xlsx"
+
+  handoff:
+    suggest:
+      - workflow: "generate-test-cases"
+        agent: "test-case-agent"
+        message: "User stories are complete. Recommend activating Scriptor (Test Case Generator) to generate test cases from the acceptance criteria in each story."
+      - workflow: "generate-srs"
+        agent: "srs-agent"
+        message: "User stories are complete. Recommend activating Specifier (SRS Agent) to generate a formal SRS document incorporating these stories as requirements."

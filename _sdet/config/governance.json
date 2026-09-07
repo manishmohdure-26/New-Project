@@ -1,0 +1,118 @@
+{
+  "_comment": "Machine mirror of _sdet/config/governance.yaml boundaries + caps. Consumed by .claude/hooks/agent-guard.js. Keep in sync with governance.yaml and each agent's writes_to.",
+  "caps": {
+    "tool_calls_warn": 150,
+    "tool_calls_stop": 250,
+    "jira_flag_max_age_minutes": 60
+  },
+  "agents": {
+    "mom-agent": {
+      "writes_to": [
+        "outputs/mom-agent/"
+      ]
+    },
+    "user-stories-agent": {
+      "writes_to": [
+        "outputs/user-stories-agent/"
+      ]
+    },
+    "srs-agent": {
+      "writes_to": [
+        "outputs/srs-agent/"
+      ]
+    },
+    "knowledge-search-agent": {
+      "writes_to": []
+    },
+    "acceptance-criteria-agent": {
+      "writes_to": [
+        "outputs/acceptance-criteria-agent/"
+      ]
+    },
+    "repo-analysis-agent": {
+      "writes_to": [
+        "outputs/repo-analysis-agent/"
+      ]
+    },
+    "test-scenario-agent": {
+      "writes_to": [
+        "outputs/test-scenario-agent/"
+      ]
+    },
+    "test-case-agent": {
+      "writes_to": [
+        "outputs/test-case-agent/"
+      ]
+    },
+    "automation-agent": {
+      "writes_to": [
+        "automation/pages/",
+        "automation/tests/e2e/",
+        "automation/tests/visual/",
+        "automation/fixtures/",
+        "automation/utils/",
+        "automation/recordings/",
+        "outputs/automation-agent/"
+      ]
+    },
+    "api-test-agent": {
+      "writes_to": [
+        "automation/api/",
+        "automation/tests/api/",
+        "automation/fixtures/",
+        "automation/utils/",
+        "outputs/api-test-agent/"
+      ]
+    },
+    "bug-report-agent": {
+      "writes_to": [
+        "outputs/bug-report-agent/",
+        "automation/scripts/"
+      ]
+    },
+    "simple-bug-report-agent": {
+      "writes_to": [
+        "outputs/bug-report-agent/",
+        "automation/scripts/"
+      ]
+    },
+    "jira-bug-tracker-agent": {
+      "writes_to": [
+        "outputs/jira-bug-tracker-agent/"
+      ]
+    },
+    "retest-agent": {
+      "writes_to": [
+        "outputs/retest-agent/"
+      ]
+    },
+    "performance-test-agent": {
+      "writes_to": [
+        "outputs/performance-test-agent/"
+      ]
+    },
+    "release-note-agent": {
+      "writes_to": [
+        "outputs/release-note-agent/"
+      ]
+    },
+    "compliance-agent": {
+      "writes_to": [
+        "outputs/compliance-agent/"
+      ]
+    },
+    "workflow-agent": {
+      "writes_to": [
+        "outputs/workflow-agent/",
+        "automation/fixtures/",
+        "automation/pages/",
+        "automation/tests/e2e/workflows/"
+      ]
+    },
+    "spec-conformance-agent": {
+      "writes_to": [
+        "outputs/spec-conformance-agent/"
+      ]
+    }
+  }
+}

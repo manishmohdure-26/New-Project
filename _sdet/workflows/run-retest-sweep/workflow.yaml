@@ -1,0 +1,40 @@
+# Run Retest Sweep Workflow
+# Agent: Gatekeeper (Retest Agent)
+# Purpose: Verify bug fixes by retesting Jira tickets in the QA environment
+
+workflow:
+  metadata:
+    id: "run-retest-sweep"
+    name: "Run Retest Sweep"
+    trigger: "retest, verify fixes, retest sweep, qa retest"
+    agent: "retest-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+      - "{project-root}/automation/config/qa-retest-config.json"
+    scale_aware: true
+
+  inputs:
+    - name: "config_path"
+      description: "Path to the QA retest configuration file (defaults to automation/config/qa-retest-config.json)"
+      required: false
+
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "outputs/retest-agent/"
+      files:
+        - "retest-report-{date}.md"
+        - "RetestReport-{date}.xlsx"
+        - "screenshots/"
+
+  handoff:
+    suggest:
+      - workflow: "report-bugs"
+        agent: "bug-report-agent"
+        message: "Reopened bugs detected during retest. Recommend activating Catcher (Bug Reporter) to document regression details and updated failure analysis."
+      - workflow: "write-automation-tests"
+        agent: "automation-agent"
+        message: "Retest sweep complete. Recommend activating Automator (Automation Agent) to add regression tests for verified fixes."

@@ -1,0 +1,16 @@
+# Strategy Review Team
+# Use for: test strategy discussions, coverage debates, risk prioritization
+
+team:
+  name: "Strategy Review Team"
+  icon: "🎯"
+  description: "Debate test strategy, coverage priorities, and scenario design"
+  agents:
+    - test-scenario-agent   # Strategist — scenario design and prioritization perspective
+    - test-case-agent   # Scriptor — coverage and scenario perspective
+
+  discussion_prompts:
+    - "Is the risk assessment accurate? Are we over/under-testing any area?"
+    - "What critical scenarios are we missing in the test coverage?"
+    - "Should we prioritize smoke testing or full regression for this feature?"
+    - "Are the test environment requirements realistic?"

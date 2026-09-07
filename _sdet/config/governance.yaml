@@ -1,0 +1,68 @@
+# SDET Governance Layer — central intelligence config loaded by ALL agents
+# Spec: docs/superpowers/specs/2026-07-17-sdet-governance-layer-design.md
+# Machine mirror for hooks: _sdet/config/governance.json — keep boundaries/caps IN SYNC.
+
+governance:
+  version: '1.0'
+  runtime_root: 'outputs/_system'
+
+  memory:
+    root: 'outputs/_system/memory'
+    shared: 'outputs/_system/memory/shared.md'
+    read_on_activation: true
+    write_on_resolved_failure: true
+    dedupe: 'If an equivalent lesson already exists, increment its Occurrences instead of adding a duplicate.'
+    promotion: 'NEVER auto-edit _sdet/knowledge/*. When a lesson reaches Occurrences >= 3, suggest running _sdet/tasks/promote-lessons.md.'
+    lesson_format: |
+      ## L-<agent>-<NNN>: <short title>
+      - **Date:** YYYY-MM-DD
+      - **Failure:** <what went wrong>
+      - **Fix:** <what resolved it>
+      - **Rule:** <generalized do/don't for next time>
+      - **Occurrences:** 1
+      - **Promoted:** no
+
+  decision_gate:
+    description: "Run before each major workflow step; log a 'decision' event with the outcome."
+    checks:
+      - 'memory: does a recorded lesson apply to this step? If yes, follow its Rule and log a lesson_applied event'
+      - 'inputs: do the required inputs below exist? If missing, STOP and recommend the prerequisite agent/command — never fabricate inputs'
+      - 'route: state in one line which workflow route or menu item applies and why'
+    requires:
+      test-case-agent: ['outputs/test-scenario-agent/']
+      automation-agent: ['outputs/test-case-agent/']
+      api-test-agent: ['outputs/test-case-agent/']
+      acceptance-criteria-agent: ['outputs/user-stories-agent/']
+      test-scenario-agent: ['outputs/user-stories-agent/']
+      retest-agent: ['automation/config/qa-retest-config.json']
+      # Agents not listed have no hard prerequisites.
+
+  observability:
+    log_dir: 'outputs/_system/logs'
+    file_pattern: '<YYYY-MM-DD>-<agent-id>.jsonl'
+    event_shape: '{"ts":"<ISO8601>","agent":"<agent-id>","event":"<type>","detail":"<one line>"}'
+    agent_events:
+      ['run_start', 'decision', 'lesson_applied', 'failure', 'lesson_recorded', 'run_end']
+    hook_events: ['tool_call'] # appended automatically by the run-logger hook
+
+  boundaries:
+    always_allowed: ['outputs/_system/']
+    forbidden:
+      - 'Jira write API calls (POST/PUT/DELETE) without outputs/_system/flags/.jira-approved — enforced by agent-guard hook'
+      - 'git push to main — enforced by block-main-push hook'
+      - 'Writes to protected files — enforced by protect-files hook'
+    per_agent: 'See writes_to in each agent YAML; machine mirror in _sdet/config/governance.json.'
+
+  cost_caps:
+    tool_calls_warn: 150 # agent-guard emits a warning
+    tool_calls_stop: 250 # agent-guard blocks; agent must stop and consult the user
+    playwright_runs_max: 5 # instructional
+    jira_api_calls_max: 10 # instructional
+    retries_per_step_max: 2 # instructional
+    on_breach: 'Halt, report consumed budget and remaining work, ask the user how to proceed.'
+
+  flags:
+    dir: 'outputs/_system/flags'
+    active_agent: '.active-agent' # contains the agent id; written on activation, deleted at run end
+    jira_approved: '.jira-approved' # create ONLY after explicit user approval in the current turn; hook rejects flags older than 60 minutes; delete at run end
+    tool_counter: '.tool-count-<agent-id>' # reset to 0 on activation

@@ -1,0 +1,38 @@
+# Generate Test Scenarios Workflow
+# Agent: Strategist (Test Scenario Agent)
+# Purpose: Design high-level, risk-prioritized test scenarios with traceability to requirements and user stories
+
+workflow:
+  metadata:
+    id: "generate-test-scenarios"
+    name: "Generate Test Scenarios"
+    trigger: "generate test scenarios, create scenarios, test scenario design"
+    agent: "test-scenario-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+    scale_aware: true
+
+  inputs:
+    - name: "source_artifacts"
+      description: "Source artifacts to analyze — SRS (outputs/srs-agent/), user stories (outputs/user-stories-agent/), acceptance criteria, and/or repo analysis (outputs/repo-analysis-agent/). Defaults to scanning outputs/ for whatever exists."
+      required: false
+    - name: "scope"
+      description: "Module/feature or milestone scope to generate scenarios for (defaults to all modules found in source artifacts)"
+      required: false
+
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "outputs/test-scenario-agent/"
+      files:
+        - "milestone-{N}/test-scenarios-milestone-{N}.md"
+        - "milestone-{N}/test-scenarios-{portal}.csv"
+
+  handoff:
+    suggest:
+      - workflow: "generate-test-cases"
+        agent: "test-case-agent"
+        message: "Test scenarios are complete with risk priorities and traceability. Recommend activating Scriptor (Test Case Generator) to expand each scenario into detailed manual test cases."

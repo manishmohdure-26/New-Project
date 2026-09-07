@@ -1,0 +1,19 @@
+# Analysis & Coverage Team
+# Use for: code analysis, risk assessment, change impact, coverage tracking
+
+team:
+  name: "Analysis & Coverage Team"
+  icon: "🔬"
+  description: "Collaborate on code analysis, risk scoring, change impact, and coverage gaps"
+  agents:
+    - repo-analysis-agent   # Scanner — architecture and code analysis perspective
+    - risk-analysis-agent   # Sentinel — risk scoring and priority perspective
+    - change-impact-agent   # Tracker — regression scope and blast radius perspective
+    - test-coverage-agent   # Auditor — coverage metrics and gap detection perspective
+  facilitator: sdet-master  # Nexus moderates
+
+  discussion_prompts:
+    - "What are the highest risk modules and do we have adequate coverage?"
+    - "How does this code change affect our regression scope?"
+    - "Where are the biggest coverage gaps relative to risk?"
+    - "Which modules have the most technical debt affecting testability?"

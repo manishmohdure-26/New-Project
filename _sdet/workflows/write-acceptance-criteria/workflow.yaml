@@ -1,0 +1,48 @@
+# Write Acceptance Criteria Workflow
+# Agent: Definer (Acceptance Criteria Agent)
+# Purpose: Research the curated wiki (project-docs/SharedByClient/curated-wiki/ — the ONLY document source) and write acceptance criteria for user stories in a Jira epic
+
+workflow:
+  metadata:
+    id: "write-acceptance-criteria"
+    name: "Write Acceptance Criteria"
+    trigger: "write acceptance criteria, create AC, acceptance criteria, write AC"
+    agent: "acceptance-criteria-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+
+  inputs:
+    - name: "story_keys"
+      description: "Existing Jira story keys to write AC for (e.g., TS-101, TS-102). If provided, Mode A (AC only) is used."
+      required: false
+    - name: "epic_key"
+      description: "Jira epic key to create stories under (e.g., TS-123). Required only for Mode B (create new stories)."
+      required: false
+    - name: "story_details"
+      description: "User story details: title, user role, goal, benefit. Required only for Mode B (create new stories)."
+      required: false
+    - name: "screenshots"
+      description: "Screenshots or local image paths to analyze for AC (e.g., project-docs/screenshots/login.png)"
+      required: false
+    - name: "figma_url"
+      description: "Figma file URL or frame URL for design analysis (e.g., https://www.figma.com/file/...)"
+      required: false
+
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "outputs/acceptance-criteria-agent/"
+      files:
+        - "AC-{epic-key}-{date}.md"
+
+  handoff:
+    suggest:
+      - workflow: "generate-test-cases"
+        agent: "test-case-agent"
+        message: "Acceptance criteria are complete. Recommend activating Scriptor (Test Case Generator) to generate test cases from the acceptance criteria."
+      - workflow: "write-automation-tests"
+        agent: "automation-agent"
+        message: "Acceptance criteria are complete. Recommend activating Automator (Automation Agent) to write E2E tests based on the acceptance criteria."

@@ -1,0 +1,16 @@
+# Automation Team
+# Use for: test automation decisions, framework discussions, coverage optimization
+
+team:
+  name: "Automation Team"
+  icon: "🤖"
+  description: "Discuss automation approach, framework decisions, and coverage optimization"
+  agents:
+    - automation-agent      # Automator — E2E automation perspective
+    - api-test-agent        # Requester — API test automation perspective
+
+  discussion_prompts:
+    - "Which tests should be automated vs kept manual?"
+    - "Is the page object structure optimal for maintainability?"
+    - "Are we generating enough edge-case test data?"
+    - "What's the right balance between E2E and visual regression test coverage?"

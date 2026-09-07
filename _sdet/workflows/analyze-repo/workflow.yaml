@@ -1,0 +1,42 @@
+# Analyze Repository Workflow
+# Agent: Scanner (Repo Analysis Agent)
+# Purpose: Analyze frontend/backend source code and extract structured testing intelligence
+
+workflow:
+  metadata:
+    id: "analyze-repo"
+    name: "Analyze Repository"
+    trigger: "analyze repo, repo analysis, analyze codebase, architecture analysis"
+    agent: "repo-analysis-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+    scale_aware: true
+
+  inputs:
+    - name: "repo_scope"
+      description: "Which repositories to analyze: frontend, backend, or both (defaults to both)"
+      required: false
+    - name: "focus_area"
+      description: "Optional focus area to prioritize (e.g., a specific module, feature, or portal)"
+      required: false
+
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "outputs/repo-analysis-agent/"
+      files:
+        - "pages.md"
+        - "playwright-locators.md"
+        - "ui-components.md"
+        - "api-endpoints.md"
+        - "ui-api-mapping.md"
+        - "user-flows.md"
+
+  handoff:
+    suggest:
+      - workflow: "generate-test-scenarios"
+        agent: "test-scenario-agent"
+        message: "Repository analysis is complete. Recommend activating Strategist (Test Scenario Agent) to create high-level test scenarios from the mapped pages, user flows, and UI-to-API mappings."

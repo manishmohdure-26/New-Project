@@ -1,0 +1,16 @@
+# Release Gate Team
+# Use for: release readiness, bug triage, retest decisions, go/no-go
+
+team:
+  name: "Release Gate Team"
+  icon: "🚀"
+  description: "Evaluate release readiness, triage bugs, and make go/no-go decisions"
+  agents:
+    - retest-agent          # Gatekeeper — fix verification and deployment status
+    - bug-report-agent          # Catcher — bug severity and impact assessment
+
+  discussion_prompts:
+    - "Are all critical bugs fixed and verified?"
+    - "What's the regression risk of the current release?"
+    - "Are there any undeployed fixes blocking release?"
+    - "Should we proceed with release or hold for more testing?"

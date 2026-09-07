@@ -1,0 +1,62 @@
+# Write API Tests Workflow
+# Agent: Requester (API Test Agent)
+# Purpose: Create Playwright API tests from Swagger, Postman, source code, or manual specs
+
+workflow:
+  metadata:
+    id: "write-api-tests"
+    name: "Write API Tests"
+    trigger: "api test, write api tests, test api endpoints, api automation, rest api tests"
+    agent: "api-test-agent"
+
+  config:
+    loads:
+      - "{project-root}/project-context.md"
+    scale_aware: true
+
+  inputs:
+    - name: "source"
+      description: "API spec source — 'swagger' for OpenAPI/Swagger JSON/YAML, 'postman' for Postman collection, 'source_code' for backend source analysis, or 'manual' for direct endpoint description. If not provided, Requester asks the user."
+      required: false
+    - name: "api_spec"
+      description: "Path to the API specification file (Swagger JSON/YAML or Postman collection JSON). Can also be a URL for hosted Swagger docs."
+      required: false
+    - name: "source_code"
+      description: "Path to the backend source code directory. Used when source is 'source_code' to discover API routes, controllers, and models."
+      required: false
+    - name: "app_url"
+      description: "API base URL (e.g., http://localhost:3000/api). Stored in .env as API_BASE_URL."
+      required: false
+    - name: "credentials"
+      description: "API auth credentials — email and password, or API key. Stored in .env (never hardcoded)."
+      required: false
+    - name: "test_cases"
+      description: "Path to test cases file, pasted in chat, OR Jira ticket number. If API-tagged test cases exist in outputs/test-case-agent/, Requester reads those first."
+      required: false
+    - name: "scale"
+      description: "Depth level — quick (3-5 endpoints), standard (8-15 endpoints), or enterprise (full API coverage). If not provided, Requester asks the user."
+      required: false
+
+  instructions: "instructions.md"
+  checklist: "checklist.md"
+
+  outputs:
+    - path: "automation/api/"
+      files:
+        - "BaseApi.js"
+        - "{ResourceName}Api.js"
+    - path: "automation/tests/api/"
+      files:
+        - "{resource-name}.api.spec.js"
+    - path: "outputs/api-test-agent/"
+      files:
+        - "api-test-summary.md"
+        - "api-coverage-report.md"
+
+  handoff:
+    suggest:
+      - workflow: "report-bugs"
+        agent: "bug-report-agent"
+        message: "API test execution complete. Recommend activating Catcher (Bug Reporter) to create structured bug reports for any failing API tests."
+
+  scale_aware: true
