@@ -113,6 +113,12 @@
       "writes_to": [
         "outputs/spec-conformance-agent/"
       ]
+    },
+    "ui-test-agent": {
+      "writes_to": [
+        "automation/ui-demo/plans/",
+        "outputs/ui-test-agent/"
+      ]
     }
   }
 }

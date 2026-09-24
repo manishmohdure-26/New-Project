@@ -4,7 +4,7 @@
 manifest:
   version: "4.0.0"
   module: "sdet"
-  total_agents: 75
+  total_agents: 76
 
 agents:
   # === DISCOVERY AGENTS ===
@@ -156,6 +156,15 @@ agents:
     command: "/spec-conformance-agent"
     type: "quality-compliance"
     description: "Audits a screen/module against curated-wiki requirements via a live walk; produces a client-style HTML conformance dashboard (PASS/FAIL/PARTIAL/NOT-REACHABLE with severity, defect class, verbatim spec quotes, and screenshots)"
+
+  - id: "ui-test-agent"
+    name: "Showcase"
+    icon: "🎬"
+    title: "UI Test & Demo Video Engineer"
+    file: "_sdet/agents/ui-test-agent.yaml"
+    command: "/ui-test-agent"
+    type: "quality-compliance"
+    description: "Tests a module UI as a chosen role and produces a narrated client-ready demo video (voice, captions, spotlight, one phrase per action) plus an optional deep UI test report with no-backend-aware verdicts"
 
   - id: "compliance-agent"
     name: "Sentinel"
@@ -734,7 +743,7 @@ categories:
     description: "Bug reporting, RCA, execution/summary reports, dashboards, and documentation"
   quality-compliance:
     icon: "🛡"
-    agents: ["retest-agent", "spec-conformance-agent", "compliance-agent", "security-test-agent", "penetration-agent", "authentication-agent", "accessibility-agent", "wcag-agent", "hipaa-agent", "soc2-agent", "ccpa-agent", "fhir-agent", "code-review-agent"]
+    agents: ["retest-agent", "spec-conformance-agent", "ui-test-agent", "compliance-agent", "security-test-agent", "penetration-agent", "authentication-agent", "accessibility-agent", "wcag-agent", "hipaa-agent", "soc2-agent", "ccpa-agent", "fhir-agent", "code-review-agent"]
     description: "Release gating, security, accessibility, compliance auditing, and QA code review"
   devops-cicd:
     icon: "☁"

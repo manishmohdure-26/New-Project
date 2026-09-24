@@ -289,6 +289,11 @@ skills:
     description: "Inspector audits a screen/module against curated-wiki requirements via a live walk; produces a client-style HTML conformance dashboard (PASS/FAIL/PARTIAL/NOT-REACHABLE with severity, defect class, verbatim spec quotes, and screenshots)"
     type: "agent"
 
+  - command: "/ui-test-agent"
+    agent: "ui-test-agent"
+    description: "Showcase tests a module UI as a chosen role and produces a narrated client-ready demo video plus an optional deep UI test report (asks module and role first)"
+    type: "agent"
+
   # Quality & Compliance (v4.0)
   - command: "/security-test-agent"
     agent: "security-test-agent"
